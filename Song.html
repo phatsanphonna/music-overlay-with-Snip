@@ -1,0 +1,197 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+    <script src=https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.6.0.js></script>
+
+    <style>
+        * {
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            height: 70px;
+
+        }
+
+        div {
+            display: inline-block;
+        }
+
+        p {
+            color: white;
+        }
+
+        h1 {
+            color: #c0d3ff;
+        }
+
+        .container {
+            height: 70px;
+            width: 350px;
+            background-color: rgb(39, 39, 39);
+            display: flex;
+            align-items: center;
+        }
+
+        .container-remove {
+            background-color: rgb(39, 39, 39, 0) !important;
+        }
+
+        .info {
+            padding-left: 15px;
+        }
+
+        .artist {
+            font-size: 24px;
+            margin-top: -25px;
+        }
+
+        .artist-dec {
+            font-size: 18px !important;
+        }
+
+        .music-dec {
+            font-size: 12px !important;
+        }
+
+        .music {
+            font-size: 18px;
+            margin-bottom: -20px;
+            margin-top: -15px;
+        }
+    </style>
+
+    <script>
+        var newArtist
+        var newMusic
+        var newArtwork
+
+        function isUpdated() {
+            $.get('./Snip_Artist.txt', data => {
+                if (data != newArtist) {
+                    newArtist = data
+                }
+            }).then(
+                $.get('./Snip_Track.txt', data => {
+                    if (data != newMusic) {
+                        newMusic = data
+                    }
+                })
+            ).then(() => {
+                showData()
+                console.log(
+                    `${newArtist} [${newArtist.length}] - ${newMusic} [${newMusic.length}] (${newArtwork})`
+                )
+            }).then(() => {
+                if (newArtist.length >= 19) {
+                    if (!($('#artist').hasClass('artist-dec'))) {
+                        console.log('artist length over limit')
+                        $('#artist').addClass('artist-dec')
+                    }
+                } else {
+                    if ($('#artist').hasClass('artist-dec')) {
+                        $('#artist').removeClass('artist-dec')
+                    }
+                }
+            }).then(() => {
+                if (newMusic.length >= 26) {
+                    if (!($('#music').hasClass('music-dec'))) {
+                        console.log('music length over limit')
+                        $('#music').addClass('music-dec')
+                    }
+                } else {
+                    if ($('#music').hasClass('music-dec')) {
+                        $('#music').removeClass('music-dec')
+                    }
+                }
+            }).then(
+                $.get('./Snip_Artwork.jpg', data => {
+                    if (data.length !== newArtwork) {
+                        newArtwork = data.length
+                        $('#artwork img').attr('src', "./Snip_Artwork.jpg")
+                    }
+                })
+            ).then(() => {
+                if (newArtist.length === 0 && newMusic.length === 0) {
+                    if (!($('#container').hasClass('container-remove'))) {
+                        $('#container').addClass('container-remove')
+                    }
+                } else {
+                    if ($('#container').hasClass('container-remove')) {
+                        $('#container').removeClass('container-remove')
+                    }
+                }
+            })
+
+            setTimeout(isUpdated, 2000)
+        }
+
+
+        function showData() {
+            document.getElementById('music').innerHTML = newMusic
+            document.getElementById('artist').innerHTML = newArtist
+        }
+
+        // function setFormat() {
+        //     if (!(newMusic == null && newArtist == null)) {
+        //         setArtistFormat().then(setMusicFormat()).catch(e, e => (console.log(e)))
+        //     }
+
+        //     setTimeout(setFormat, 2000)
+        // }
+
+        // function setArtistFormat() {
+        //     if (newArtist.length > 16) {
+        //         if (!($('#artist').hasClass('artist-dec'))) {
+        //             console.log('artist length over limit')
+        //             $('#artist').addClass('artist-dec')
+        //         }
+        //     } else {
+        //         if ($('#artist').hasClass('artist-dec')) {
+        //             $('#artist').removeClass('artist-dec')
+        //         }
+        //     }
+        // }
+
+        // function setMusicFormat() {
+        //     if (newMusic.length > 16) {
+        //         if (!($('#music').hasClass('music-dec'))) {
+        //             console.log('music length over limit')
+        //             $('#music').addClass('music-dec')
+        //         }
+        //     } else {
+        //         if ($('#music').hasClass('music-dec')) {
+        //             $('#music').removeClass('music-dec')
+        //         }
+        //     }
+        // }
+
+        $(document).ready(() => {
+            isUpdated()
+        })
+    </script>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="artwork" id="artwork">
+            <img src="Snip_Artwork.jpg">
+        </div>
+        <div class="info">
+            <h1 class="artist" id="artist"></h1>
+            <p class="music" id="music"></p>
+        </div>
+    </div>
+</body>
+
+</html>

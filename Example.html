@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Sarabun', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            height: 70px;
+
+        }
+
+        div {
+            display: inline-block;
+        }
+
+        p {
+            color: white;
+        }
+
+        h1 {
+            color: #c0d3ff;
+        }
+
+        .container {
+            height: 70px;
+            width: 350px;
+            background-color: rgb(39, 39, 39);
+            display: flex;
+            align-items: center;
+        }
+
+        .container-remove {
+            background-color: rgb(39, 39, 39, 0) !important;
+        }
+
+        .info {
+            padding-left: 15px;
+        }
+
+        .artist {
+            font-size: 24px;
+            margin-top: -25px;
+        }
+
+        .artist-dec {
+            font-size: 18px !important;
+        }
+
+        .music-dec {
+            font-size: 12px !important;
+        }
+
+        .music {
+            font-size: 18px;
+            margin-bottom: -20px;
+            margin-top: -15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="container">
+        <div class="artwork" id="artwork">
+            <img src="https://static.wikia.nocookie.net/iz-one/images/4/4c/One-reeler_Digital.jpg/revision/latest?cb=20201206150402">
+        </div>
+        <div class="info">
+            <h1 class="artist" id="artist">IZ*ONE</h1>
+            <p class="music" id="music">Panorama</p>
+        </div>
+    </div>
+</body>
+
+</html>
