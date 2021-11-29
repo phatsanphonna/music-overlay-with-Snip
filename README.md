@@ -1,4 +1,6 @@
-# music-overlay-with-Snip
+# Music Overlay with Snip
+
+Cool music overlay with Snip built with jQuery.
 
 ### How to use
 - Place `Song.html` in Snip root directory.
